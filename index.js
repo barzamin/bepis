@@ -25,16 +25,12 @@ bot.on('message', (m) => {
 		m.reply(gen);
 	}
 
-	if (m.content.toLowerCase().startsWith('gimme some hawt bepis')) {
-		m.reply('click this fat spicy link right down there ⤵\nhttps://discordapp.com/oauth2/authorize?client_id=283818048127893515&scope=bot&permissions=0');
-    }
-
     if (m.content.includes("help") && m.isMentioned(bot.user)) {
-        m.reply(`fucc u but heres some help anyway
-- just say "gimme some hawt bepis" and i'll shit out an invite link for u :heart:
-- and ofc just say "bepis me" to be quickly bepised
+        m.reply(`*fucc u* but heres some help anyway
+- ofc just say "bepis me" to be quickly bepised
 - \`smut me <booru name> [tags=<tags>]\`
-    - supported boorus: \`${smut.BOORUS.join(', ')}\``);
+    - supported boorus: \`${smut.BOORUS.join(', ')}\`
+- to get me on UR SERVER, click this fat spicy link right down there ⤵\n     <https://discordapp.com/oauth2/authorize?client_id=283818048127893515&scope=bot&permissions=0>`);
     }
 
     if (m.content.toLowerCase().startsWith('smut me')) {

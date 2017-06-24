@@ -5,6 +5,9 @@ const tracery = require('tracery-grammar');
 const config = require('./config.json');
 const smut = require('./smut');
 
+const package_json = require('./package.json');
+const VERSION = package_json.version;
+
 
 const bot = new Discord.Client();
 
@@ -30,7 +33,8 @@ bot.on('message', (m) => {
 - ofc just say "bepis me" to be quickly bepised
 - \`smut me <booru name> [tags=<tags>]\`
     - supported boorus: \`${smut.BOORUS.join(', ')}\`
-- to get me on UR SERVER, click this fat spicy link right down there ⤵\n     <https://discordapp.com/oauth2/authorize?client_id=283818048127893515&scope=bot&permissions=0>`);
+- to get me on UR SERVER, click this fat spicy link right down there ⤵\n     <https://discordapp.com/oauth2/authorize?client_id=283818048127893515&scope=bot&permissions=0>
+- u are bein SERVED dat HAWT BEPIS by BepisBot version ${VERSION}. u can thank \`barzamin#3698\` fo dat SHIZ`);
     }
 
     if (m.content.toLowerCase().startsWith('smut me')) {

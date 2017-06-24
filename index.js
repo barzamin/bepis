@@ -16,7 +16,7 @@ grammar.addModifiers(tracery.baseEngModifiers);
 
 bot.on('ready', () => {
 	console.log("==> Bot logged in!");
-	console.log("Currently in:", bot.guilds.map(g=>g.name));
+	console.log(`Currently in ${bot.guilds.size} servers`);
 });
 
 bot.on('message', (m) => {
@@ -32,9 +32,11 @@ bot.on('message', (m) => {
         m.reply(`*fucc u* but heres some help anyway
 - ofc just say "bepis me" to be quickly bepised
 - \`smut me <booru name> [tags=<tags>]\`
-    - supported boorus: \`${smut.BOORUS.join(', ')}\`
+	- supported boorus: \`${smut.BOORUS.join(', ')}\`
+
 - to get me on UR SERVER, click this fat spicy link right down there ⤵\n     <https://discordapp.com/oauth2/authorize?client_id=283818048127893515&scope=bot&permissions=0>
-- u are bein SERVED dat HAWT BEPIS by BepisBot version ${VERSION}. u can thank \`barzamin#3698\` fo dat SHIZ`);
+- u are bein SERVED dat HAWT BEPIS by BepisBot version ${VERSION}. u can thank \`barzamin#3698\` fo dat SHIZ
+- ${bot.guilds.size} :floppy_disk:SERVBERS:floppy_disk: are currently bein BEPISED :eggplant:`);
     }
 
     if (m.content.toLowerCase().startsWith('smut me')) {

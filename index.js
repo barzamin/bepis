@@ -4,6 +4,7 @@ const tracery = require('tracery-grammar');
 
 const config = require('./config.json');
 const smut = require('./smut');
+const inspirobotme = require('./inspirobotme');
 
 const package_json = require('./package.json');
 const VERSION = package_json.version;
@@ -33,6 +34,9 @@ bot.on('message', (m) => {
 - ofc just say "bepis me" to be quickly bepised
 - \`smut me <booru name> [tags=<tags>]\`
 	- supported boorus: \`${smut.BOORUS.join(', ')}\`
+- \`🍆 inspirobot me\` will pull an *inspiring* image from <http://inspirobot.me>
+
+- (note/news: eventually transitioning to 🍆 as a prefix)
 
 - to get me on UR SERVER, click this fat spicy link right down there ⤵\n     <https://discordapp.com/oauth2/authorize?client_id=283818048127893515&scope=bot&permissions=0>
 - u are bein SERVED dat HAWT BEPIS by BepisBot version ${VERSION}. u can thank \`barzamin#3698\` fo dat SHIZ
@@ -54,6 +58,16 @@ bot.on('message', (m) => {
                 smutf.then(u=>{m_.delete(); m.reply(u)})
                     .catch(u=>{m.reply(`error ${u}`); m_.delete()});
             });
+    }
+
+    if (m.content.toLowerCase().match(/^🍆\s+inspirobot me/i)) {
+        inspirobotme().then(url => {
+            m.channel.send(':white_check_mark: INSPIRATION GET! :white_check_mark:', {
+                files: [url],
+            });
+        }).catch(err => {
+            m.reply(`Error getting inspiration: ${err}`);
+        });
     }
 });
 

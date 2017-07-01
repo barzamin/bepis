@@ -25,7 +25,8 @@ bot.on('ready', () => {
 
 bot.on('message', (m) => {
 	if (m.content.toLowerCase().startsWith('bepis me')) {
-        rclient.incr("usage:command:bepisme");
+        rclient.hincrby("usage:command", "bepisme", 1);
+
 
 		console.log(`Bepising ${m.author.username}#${m.author.discriminator}`);
 
@@ -35,7 +36,7 @@ bot.on('message', (m) => {
 	}
 
     if (m.content.includes("help") && m.isMentioned(bot.user)) {
-        rclient.incr("usage:command:help");
+        rclient.hincrby("usage:command", "help", 1);
 
         m.reply(`*fucc u* but heres some help anyway
 - ofc just say "bepis me" to be quickly bepised
@@ -51,7 +52,7 @@ bot.on('message', (m) => {
     }
 
     if (m.content.toLowerCase().startsWith('smut me')) {
-        rclient.incr("usage:command:smutme");
+        rclient.hincrby("usage:command", "smutme", 1);
 
         const args = m.content.split(' ').slice(2);
         const argss = args.join(' ');
@@ -69,8 +70,8 @@ bot.on('message', (m) => {
             });
     }
 
-    if (m.content.toLowerCase().match(/^🍆\s+inspirobot me/i)) {
-        rclient.incr("usage:command:inspirobotme");
+    if (m.content.match(/^🍆\s*inspirobot me/i)) {
+        rclient.hincrby("usage:command", "inspirobotme", 1);
 
         inspirobotme().then(url => {
             m.channel.send(':white_check_mark: INSPIRATION GET! :white_check_mark:', {
@@ -78,6 +79,18 @@ bot.on('message', (m) => {
             });
         }).catch(err => {
             m.reply(`Error getting inspiration: ${err}`);
+        });
+    }
+
+    if (m.content.match(/^🍆\s*stats/i)) {
+        rclient.hincrby("usage:command", "stats", 1);
+
+        rclient.hgetall("usage:command", (err, res) => {
+            const statdesc = _.reverse(_.sortBy(_.toPairs(res), [o=>o[1]]))
+                .map(c => `• ${c[0]} : ${c[1]}`)
+                .join('\n');
+            m.channel.send(`:chart_with_downwards_trend: Usage statistics :chart_with_upwards_trend:
+${statdesc}`);
         });
     }
 });

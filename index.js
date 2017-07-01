@@ -23,6 +23,8 @@ bot.on('ready', () => {
 	console.log(`Currently in ${bot.guilds.size} servers`);
 });
 
+const leftPad = (s,c,n) => (s.length<n) ? c.repeat(n-s.length)+s : s;
+
 bot.on('message', (m) => {
 	if (m.content.toLowerCase().startsWith('bepis me')) {
         rclient.hincrby("usage:command", "bepisme", 1);
@@ -86,11 +88,17 @@ bot.on('message', (m) => {
         rclient.hincrby("usage:command", "stats", 1);
 
         rclient.hgetall("usage:command", (err, res) => {
-            const statdesc = _.reverse(_.sortBy(_.toPairs(res), [o=>o[1]]))
-                .map(c => `• ${c[0]} : ${c[1]}`)
-                .join('\n');
-            m.channel.send(`:chart_with_downwards_trend: Usage statistics :chart_with_upwards_trend:
-${statdesc}`);
+            const stats = _.reverse(_.sortBy(_.toPairs(_.mapValues(res, v=>parseInt(v))), [o=>o[1]]));
+            console.log(stats);
+            const hist_max = _.maxBy(stats, [c => c[1]])[1];
+            const HIST_SIZE = 10;
+            statmsg = "stastontics:::\n```";
+            for ([cmd, usage] of stats) {
+                const barlen = Math.round(usage/hist_max*HIST_SIZE);
+                statmsg += `${leftPad(cmd, ' ', 15)}|${'#'.repeat(barlen)}\n`; 
+            }
+            statmsg += "```";
+            m.channel.send(statmsg);
         });
     }
 });

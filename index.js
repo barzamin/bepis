@@ -1,8 +1,10 @@
 const _ = require('lodash');
 const Discord = require('discord.js');
 const tracery = require('tracery-grammar');
+const redis = require('redis');
 
-const config = require('./config.json');
+const config = _.merge(require('./config.json'), require('./secrets.json'));
+
 const smut = require('./smut');
 const inspirobotme = require('./inspirobotme');
 
@@ -11,6 +13,7 @@ const VERSION = package_json.version;
 
 
 const bot = new Discord.Client();
+const rclient = redis.createClient(config.db.redis);
 
 const grammar = tracery.createGrammar(require('./bepis.json'));
 grammar.addModifiers(tracery.baseEngModifiers);
@@ -22,6 +25,8 @@ bot.on('ready', () => {
 
 bot.on('message', (m) => {
 	if (m.content.toLowerCase().startsWith('bepis me')) {
+        rclient.incr("usage:command:bepisme");
+
 		console.log(`Bepising ${m.author.username}#${m.author.discriminator}`);
 
 		const gen = grammar.flatten('#origin#');
@@ -30,6 +35,8 @@ bot.on('message', (m) => {
 	}
 
     if (m.content.includes("help") && m.isMentioned(bot.user)) {
+        rclient.incr("usage:command:help");
+
         m.reply(`*fucc u* but heres some help anyway
 - ofc just say "bepis me" to be quickly bepised
 - \`smut me <booru name> [tags=<tags>]\`
@@ -44,6 +51,8 @@ bot.on('message', (m) => {
     }
 
     if (m.content.toLowerCase().startsWith('smut me')) {
+        rclient.incr("usage:command:smutme");
+
         const args = m.content.split(' ').slice(2);
         const argss = args.join(' ');
 
@@ -61,6 +70,8 @@ bot.on('message', (m) => {
     }
 
     if (m.content.toLowerCase().match(/^🍆\s+inspirobot me/i)) {
+        rclient.incr("usage:command:inspirobotme");
+
         inspirobotme().then(url => {
             m.channel.send(':white_check_mark: INSPIRATION GET! :white_check_mark:', {
                 files: [url],

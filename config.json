@@ -1,0 +1,5 @@
+{
+	"db": {
+		"redis": "//localhost:6379"
+	}
+}

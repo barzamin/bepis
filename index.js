@@ -101,8 +101,8 @@ bot.on('message', (m) => {
         });
     }
 
-    if (m.content.match(/^eval\n```(?:js)?\n([\s\S]*)\n```/i) && config.owners.includes(m.author.id)) {
-        const [, code] = m.content.match(/^eval\n```(?:js)?\n([\s\S]*)\n```/i);
+    if (m.content.match(/^🍆\s*eval\n```(?:js)?\n([\s\S]*)\n```/i) && config.owners.includes(m.author.id)) {
+        const [, code] = m.content.match(/^🍆\s*eval\n```(?:js)?\n([\s\S]*)\n```/i);
 
         console.log(`running eval at request of ${m.author}`);
         try {

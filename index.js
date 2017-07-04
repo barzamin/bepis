@@ -113,6 +113,12 @@ bot.on('message', (m) => {
             m.channel.send('```\n' + e + '```')
         }
     }
+
+    if (m.content.match(/^🍆\s*ping/i)) {
+        m_s = m.channel.send(":eggplant: pong :weary:");
+        dt = Date.now() - m_s.timestamp;
+        m_s.edit(`:eggplant: pong :weary: ::: **${dt}s**`);
+    }
 });
 
 bot.login(config.token);

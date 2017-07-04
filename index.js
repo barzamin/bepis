@@ -101,9 +101,16 @@ bot.on('message', (m) => {
         });
     }
 
-    if (m.content.match(/^🍆\s*echo\s+(.*)/i) && config.owners.includes(m.author.id)) {
-        let [, estr] = m.content.match(/^🍆\s*echo\s+(.*)/i);
-        m.channel.send(estr);
+    if (m.content.match(/^eval\n```(?:js)?\n([\s\S]*)\n```/i) && config.owners.includes(m.author.id)) {
+        const [, code] = m.content.match(/^eval\n```(?:js)?\n([\s\S]*)\n```/i);
+
+        console.log(`running eval at request of ${m.author}`);
+        try {
+            const res = eval(code);
+            m.channel.send('```\n' + inspect(res) + '```');
+        } catch (e) {
+            m.channel.send('```\n' + e + '```')
+        }
     }
 });
 

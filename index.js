@@ -118,7 +118,7 @@ bot.on('message', (m) => {
         m.channel.send(":eggplant: pong :weary:")
             .then(m_s => {
                 dt = Date.now() - m_s.createdTimestamp;
-                m_s.edit(`:eggplant: pong :weary: ::: **${dt}s**`);
+                m_s.edit(`:eggplant: pong :weary: ::: **${dt}ms**`);
             });
     }
 });

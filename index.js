@@ -102,7 +102,7 @@ bot.on('message', (m) => {
     }
 
     if (m.content.match(/^🍆\s*echo\s+(.*)/i) && config.owners.includes(m.author.id)) {
-        let [, estr] = m.content.exec(/^🍆\s*echo\s+(.*)/i);
+        let [, estr] = m.content.match(/^🍆\s*echo\s+(.*)/i);
         m.channel.send(estr);
     }
 });

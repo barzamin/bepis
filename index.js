@@ -117,7 +117,7 @@ bot.on('message', (m) => {
     if (m.content.match(/^🍆\s*ping/i)) {
         m.channel.send(":eggplant: pong :weary:")
             .then(m_s => {
-                d_t = Date.now() - m_s.createdTimestamp;
+                dt = Date.now() - m_s.createdTimestamp;
                 m_s.edit(`:eggplant: pong :weary: ::: **${dt}s**`);
             });
     }

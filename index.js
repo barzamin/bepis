@@ -89,7 +89,6 @@ bot.on('message', (m) => {
 
         rclient.hgetall("usage:command", (err, res) => {
             const stats = _.reverse(_.sortBy(_.toPairs(_.mapValues(res, v=>parseInt(v))), [o=>o[1]]));
-            console.log(stats);
             const hist_max = _.maxBy(stats, [c => c[1]])[1];
             const HIST_SIZE = 10;
             statmsg = "stastontics:::\n```";
@@ -100,6 +99,11 @@ bot.on('message', (m) => {
             statmsg += "```";
             m.channel.send(statmsg);
         });
+    }
+
+    if (m.content.match(/^🍆\s*echo\s+(.*)/i) && config.owners.includes(m.author.id)) {
+        let [, estr] = m.content.exec(/^🍆\s*echo\s+(.*)/i);
+        m.channel.send(estr);
     }
 });
 

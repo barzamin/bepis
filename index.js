@@ -2,6 +2,7 @@ const _ = require('lodash');
 const Discord = require('discord.js');
 const tracery = require('tracery-grammar');
 const redis = require('redis');
+const {inspect} = require('util');
 
 const config = _.merge(require('./config.json'), require('./secrets.json'));
 
@@ -107,7 +108,7 @@ bot.on('message', (m) => {
         console.log(`running eval at request of ${m.author}`);
         try {
             const res = eval(code);
-            m.channel.send('```\n' + inspect(res) + '```');
+            m.channel.send('```js\n' + inspect(res) + '```');
         } catch (e) {
             m.channel.send('```\n' + e + '```')
         }

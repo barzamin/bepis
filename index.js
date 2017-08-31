@@ -27,6 +27,10 @@ bot.on('ready', () => {
 const leftPad = (s,c,n) => (s.length<n) ? c.repeat(n-s.length)+s : s;
 
 bot.on('message', (m) => {
+    if (m.author.id === bot.user.id) {
+        return;
+    }
+
     if (m.content.toLowerCase().startsWith('bepis me')) {
         rclient.hincrby("usage:command", "bepisme", 1);
 

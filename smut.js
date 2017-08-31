@@ -2,8 +2,7 @@ const _ = require('lodash');
 
 const gelbooru = require('./boorus/gelbooru');
 
-const BOORUS = ['r34', 'rule34', 'gelbooru', 'furrybooru',
-    'r34stuck'];
+const BOORUS = ['r34', 'rule34', 'gelbooru', 'furrybooru'];
 const BOORU_FETCHERS = {
     'gelbooru': ['r34', 'rule34', 'gelbooru', 'furrybooru',
         'r34stuck'],

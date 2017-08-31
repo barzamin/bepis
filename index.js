@@ -20,47 +20,46 @@ const grammar = tracery.createGrammar(require('./bepis.json'));
 grammar.addModifiers(tracery.baseEngModifiers);
 
 bot.on('ready', () => {
-	console.log("==> Bot logged in!");
-	console.log(`Currently in ${bot.guilds.size} servers`);
+    console.log("==> Bot logged in!");
+    console.log(`Currently in ${bot.guilds.size} servers`);
 });
 
 const leftPad = (s,c,n) => (s.length<n) ? c.repeat(n-s.length)+s : s;
 
 bot.on('message', (m) => {
-	if (m.content.toLowerCase().startsWith('bepis me')) {
+    if (m.content.toLowerCase().startsWith('bepis me')) {
         rclient.hincrby("usage:command", "bepisme", 1);
 
+        console.log(`Bepising ${m.author.username}#${m.author.discriminator}`);
 
-		console.log(`Bepising ${m.author.username}#${m.author.discriminator}`);
+        const gen = grammar.flatten('#origin#');
+        console.log(`    ${gen}`);
+        m.reply(gen);
+    }
 
-		const gen = grammar.flatten('#origin#');
-		console.log(`    ${gen}`);
-		m.reply(gen);
-	}
-
-    if (m.content.includes("help") && m.isMentioned(bot.user)) {
+    if (m.content.match(/^🍆\s*help/i)) {
         rclient.hincrby("usage:command", "help", 1);
 
         m.reply(`*fucc u* but heres some help anyway
-- ofc just say "bepis me" to be quickly bepised
-- \`smut me <booru name> [tags=<tags>]\`
-	- supported boorus: \`${smut.BOORUS.join(', ')}\`
-- \`🍆 inspirobot me\` will pull an *inspiring* image from <http://inspirobot.me>
+- ofc just say "bepis me" to be quickly bepised (*note: will stay forever unprefixed*)
+- \`🍆smut me <booru name> [tags=<tags>]\`
+    - supported boorus: \`${smut.BOORUS.join(', ')}\`
+- \`🍆inspirobot me\` will pull an *inspiring* image from <http://inspirobot.me>
+- \`🍆help\` for whatever the Fuck this Shit yr reading atm is
 
-- (note/news: eventually transitioning to 🍆 as a prefix)
+- to get me on UR SERVER, click this fat spicy link right down there ⤵
+<https://discordapp.com/oauth2/authorize?client_id=283818048127893515&scope=bot&permissions=0>
 
-- to get me on UR SERVER, click this fat spicy link right down there ⤵\n     <https://discordapp.com/oauth2/authorize?client_id=283818048127893515&scope=bot&permissions=0>
 - u are bein SERVED dat HAWT BEPIS by BepisBot version ${VERSION}. u can thank \`barzamin#3698\` fo dat SHIZ
 - ${bot.guilds.size} :floppy_disk:SERVBERS:floppy_disk: are currently bein BEPISED :eggplant:`);
     }
 
-    if (m.content.toLowerCase().startsWith('smut me')) {
+    if (m.content.match(/^🍆\s*smut ?me/i)) {
         rclient.hincrby("usage:command", "smutme", 1);
 
-        const args = m.content.split(' ').slice(2);
-        const argss = args.join(' ');
+        m.reply('**warning:** probably broken atm');
 
-        const argm = argss.match(/from (\w+)(?: tags=(.+))?/i);
+        const argm = m.content.match(/^🍆\s*smut ?me from (\w+)(?: tags=(.+))?/i);
         if (!argm) {
             m.reply('bad command fucc u'); return;
         }

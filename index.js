@@ -61,8 +61,6 @@ bot.on('message', (m) => {
     if (m.content.match(/^🍆\s*smut ?me/i)) {
         rclient.hincrby("usage:command", "smutme", 1);
 
-        m.reply('**warning:** probably broken atm');
-
         const argm = m.content.match(/^🍆\s*smut ?me from (\w+)(?: tags=(.+))?/i);
         if (!argm) {
             m.reply('bad command fucc u'); return;

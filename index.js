@@ -46,7 +46,7 @@ bot.on('message', (m) => {
 
         m.reply(`*fucc u* but heres some help anyway
 - ofc just say "bepis me" to be quickly bepised (*note: will stay forever unprefixed*)
-- \`🍆smut me <booru name> [tags=<tags>]\`
+- \`🍆smut me from <booru name> (<tags>)\`
     - supported boorus: \`${smut.BOORUS.join(', ')}\`
 - \`🍆inspirobot me\` will pull an *inspiring* image from <http://inspirobot.me>
 - \`🍆help\` for whatever the Fuck this Shit yr reading atm is
@@ -61,7 +61,7 @@ bot.on('message', (m) => {
     if (m.content.match(/^🍆\s*smut ?me/i)) {
         rclient.hincrby("usage:command", "smutme", 1);
 
-        const argm = m.content.match(/^🍆\s*smut ?me from (\w+)(?: tags=(.+))?/i);
+        const argm = m.content.match(/^🍆\s*smut ?me from (\w+)\s*(.+)?/i);
         if (!argm) {
             m.reply('bad command fucc u'); return;
         }

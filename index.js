@@ -63,7 +63,7 @@ bot.on('message', (m) => {
 
         const argm = m.content.match(/^🍆\s*smut ?me from (\w+)\s*(.+)?/i);
         if (!argm) {
-            m.reply('bad command fucc u'); return;
+            m.reply('bad command fucc u\nformat is `🍆smut me from <booru name> (<tags>)`'); return;
         }
         const [,source,tags] = argm;
         const smutf = smut.get(source.trim(), tags);

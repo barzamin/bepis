@@ -55,7 +55,8 @@ bot.on('message', (m) => {
 <https://discordapp.com/oauth2/authorize?client_id=283818048127893515&scope=bot&permissions=0>
 
 - u are bein SERVED dat HAWT BEPIS by BepisBot version ${VERSION}. u can thank \`barzamin#3698\` fo dat SHIZ
-- ${bot.guilds.size} :floppy_disk:SERVBERS:floppy_disk: are currently bein BEPISED :eggplant:`);
+- ${bot.guilds.size} :floppy_disk:SERVBERS:floppy_disk: are currently bein BEPISED :eggplant:
+- if u like bepis, u could buy erin a coffee: <https://ko-fi.com/witchofcodez>`);
     }
 
     if (m.content.match(/^🍆\s*smut ?me/i)) {

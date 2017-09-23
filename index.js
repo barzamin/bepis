@@ -21,7 +21,8 @@ grammar.addModifiers(tracery.baseEngModifiers);
 
 bot.on('ready', () => {
     console.log("==> Bot logged in!");
-    console.log(`Currently in ${bot.guilds.size} servers`);
+	console.log(`Currently in ${bot.guilds.size} servers`);
+	bot.user.setPresence({game: {name: 'try 🍆help', type:0 }});
 });
 
 const leftPad = (s,c,n) => (s.length<n) ? c.repeat(n-s.length)+s : s;

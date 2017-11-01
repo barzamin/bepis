@@ -15,7 +15,7 @@ const VERSION = package_json.version;
 
 
 const bot = new Discord.Client();
-const rclient = redis.createClient(config.db.redis);
+const rclient = redis.createClient(process.env.REDIS_URL);
 
 const grammar = tracery.createGrammar(require('./bepis.json'));
 grammar.addModifiers(tracery.baseEngModifiers);

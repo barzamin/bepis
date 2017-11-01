@@ -4,7 +4,8 @@ const tracery = require('tracery-grammar');
 const redis = require('redis');
 const {inspect} = require('util');
 
-const config = _.merge(require('./config.json'), require('./secrets.json'));
+const config = require('./config.json');
+config.token = process.env.TOKEN;
 
 const smut = require('./smut');
 const inspirobotme = require('./inspirobotme');

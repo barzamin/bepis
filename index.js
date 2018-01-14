@@ -48,7 +48,7 @@ bot.on('message', (m) => {
 
         m.reply(`*fucc u* but heres some help anyway
 - ofc just say "bepis me" to be quickly bepised (*note: will stay forever unprefixed*)
-- \`🍆smut me from <booru name> <tags>\`
+- \`🍆smut me from <booru name> <tags separated by spaces>\`
     - supported boorus: \`${smut.BOORUS.join(', ')}\`
 - \`🍆inspirobot me\` will pull an *inspiring* image from <http://inspirobot.me>
 - \`🍆help\` for whatever the Fuck this Shit yr reading atm is
@@ -75,7 +75,16 @@ command changed; format is now is \`🍆smut me from <booru name> <tags>\``);
             return;
         }
 
-        const [,source,tags] = argm;
+        const [,source,tagargs] = argm;
+        function collapse(a) {
+            if (a.length === 1 && a[0] === "") {
+                return [];
+            } else {
+                return a;
+            }
+        }
+        const tags = collapse(tagargs.split(' '));
+
         const smutf = smut.get(source.trim(), tags);
         m.reply(`fetching smut...`)
             .then(m_ => {

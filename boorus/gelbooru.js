@@ -3,8 +3,8 @@ const xml2js = require('xml2js-es6-promise');
 const promisify = require('promisify-node');
 const normalizeUrl = require('normalize-url');
 
-function get(base_url, limit, postid, tags='') {
-    const req_url = `${base_url}/index.php?page=dapi&s=post&q=index&limit=${limit}&pid=${postid}&tags=${tags}`;
+function get(base_url, limit, postid, tags=[]) {
+    const req_url = `${base_url}/index.php?page=dapi&s=post&q=index&limit=${limit}&pid=${postid}&tags=${tags.join('+')}`;
     //console.log(`request to ${req_url}`);
     return fetch(req_url)
         .then((res) => res.text())
@@ -12,7 +12,7 @@ function get(base_url, limit, postid, tags='') {
         .then((x) => x.posts);
 }
 
-function random(base_url, tags='') {
+function random(base_url, tags=[]) {
     // get the most recent post
     return get(base_url, 1, 0, tags)
         .then(p_ => {
@@ -21,7 +21,7 @@ function random(base_url, tags='') {
         .then(r => Promise.all([r, get(base_url, 1, r, tags)]))
 }
 
-function randomUrl(base_url, tags='') {
+function randomUrl(base_url, tags=[]) {
     return random(base_url, tags)
         .then(r => {
             if (!r[1].post) throw 'no images found';

@@ -15,8 +15,8 @@ const BOORU_URLS = {
     'r34stuck': 'http://rule34stuck.booru.org',
 };
 
-function get(source, tagargs) {
-    console.log(`getting smut from ${source} with tagargs=${tagargs}`);
+function get(source, tags=[]) {
+    console.log(`getting smut from ${source} with tags=${tags}`);
 
     if (source.startsWith('booru') || BOORUS.includes(source)) {
         const booru = source.startsWith('booru') ? source.split(' ').slice(1) : source;
@@ -25,8 +25,6 @@ function get(source, tagargs) {
         console.log(` fetching from booru ${booru} with ${fetcher}`);
 
         if (fetcher == 'gelbooru') {
-            const tags = tagargs?tagargs:"";
-
             return gelbooru.randomUrl(url, tags);
         }
     }

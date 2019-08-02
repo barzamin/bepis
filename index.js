@@ -20,7 +20,7 @@ const rclient = redis.createClient(process.env.REDIS_URL);
 const bepisGrammar = tracery.createGrammar(require('./bepis.json'));
 bepisGrammar.addModifiers(tracery.baseEngModifiers);
 
-const genderGrammar = tracery.createGrammar(require('./bepis.json'));
+const genderGrammar = tracery.createGrammar(require('./gender.json'));
 genderGrammar.addModifiers(tracery.baseEngModifiers);
 
 bot.on('ready', () => {
@@ -49,7 +49,7 @@ bot.on('message', (m) => {
     if (m.content.match(/^🍆\s*gender/i)) {
         rclient.hincrby("usage:command", "gender", 1);
 
-        const gen = genderGrammar.flatten('#gender#');
+        const gen = genderGrammar.flatten('#origin#');
         m.reply(gen);
     }
 

@@ -17,8 +17,11 @@ const VERSION = package_json.version;
 const bot = new Discord.Client();
 const rclient = redis.createClient(process.env.REDIS_URL);
 
-const grammar = tracery.createGrammar(require('./bepis.json'));
-grammar.addModifiers(tracery.baseEngModifiers);
+const bepisGrammar = tracery.createGrammar(require('./bepis.json'));
+bepisGrammar.addModifiers(tracery.baseEngModifiers);
+
+const genderGrammar = tracery.createGrammar(require('./bepis.json'));
+genderGrammar.addModifiers(tracery.baseEngModifiers);
 
 bot.on('ready', () => {
     console.log("==> Bot logged in!");
@@ -38,8 +41,15 @@ bot.on('message', (m) => {
 
         console.log(`Bepising ${m.author.username}#${m.author.discriminator}`);
 
-        const gen = grammar.flatten('#origin#');
+        const gen = bepisGrammar.flatten('#origin#');
         console.log(`    ${gen}`);
+        m.reply(gen);
+    }
+
+    if (m.content.match(/^🍆\s*gender/i)) {
+        rclient.hincrby("usage:command", "gender", 1);
+
+        const gen = genderGrammar.flatten('#gender#');
         m.reply(gen);
     }
 

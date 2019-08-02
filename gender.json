@@ -1,0 +1,6 @@
+{
+    "adj": ["[REDACTED]","queer","twink","dramatic","masc","fem","goth","big tiddie","emo","motherfucking","nerdy","punk","bitch","gay","ugly","furry","kinnie","???","slutty","bisexual","cowboy","southern","trans","piss","nonbinary","genderfluid","cryptic","genderqueer","lazy","tired","sleepy","bigender","hhhhhh","old","stupid","dumbass","shitty","sparkly","glittery","edgy","pretty","shiny","beautiful","lovely",""],
+    "interstitial": ["motherfucking","[REDACTED]","ass","???","hhhhhh",""],
+    "noun": ["girlfriend","boyfriend","boy","girl","bitch","bastard","fuck","nerd","weeb","emo","goth","gamer","loser","fucker","disaster","queer","kinnie","piss","???","gay","bisexual","hhhhhh","top","datemate","furry","man","woman","dumbass","idiot","person","slut"],
+    "gender": "#adj# #interstitial# #noun#"
+}

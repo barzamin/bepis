@@ -5,7 +5,7 @@ const normalizeUrl = require('normalize-url');
 
 function get(base_url, limit, postid, tags=[]) {
     const req_url = `${base_url}/index.php?page=dapi&s=post&q=index&limit=${limit}&pid=${postid}&tags=${tags.join('+')}`;
-    //console.log(`request to ${req_url}`);
+    console.log(`request to ${req_url}`);
     return fetch(req_url)
         .then((res) => res.text())
         .then((b) => xml2js(b))

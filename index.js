@@ -61,6 +61,7 @@ bot.on('message', (m) => {
 - \`🍆smut me from <booru name> <tags separated by spaces>\`
     - supported boorus: \`${smut.BOORUS.join(', ')}\`
 - \`🍆inspirobot me\` will pull an *inspiring* image from <http://inspirobot.me>
+- \`🍆gender me\` will come up with a terrible new gender for you and your friends
 - \`🍆help\` for whatever the Fuck this Shit yr reading atm is
 
 - to get me on UR SERVER, click this fat spicy link right down there ⤵

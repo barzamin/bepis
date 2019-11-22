@@ -23,6 +23,9 @@ bepisGrammar.addModifiers(tracery.baseEngModifiers);
 const genderGrammar = tracery.createGrammar(require('./gender.json'));
 genderGrammar.addModifiers(tracery.baseEngModifiers);
 
+const identityGrammar = tracery.createGrammar(require('./identity.json'));
+identityGrammar.addModifiers(tracery.baseEngModifiers);
+
 bot.on('ready', () => {
     console.log("==> Bot logged in!");
 	console.log(`Currently in ${bot.guilds.size} servers`);
@@ -50,6 +53,13 @@ bot.on('message', (m) => {
         rclient.hincrby("usage:command", "gender", 1);
 
         const gen = genderGrammar.flatten('#origin#');
+        m.reply(gen);
+    }
+
+    if (m.content.match(/^🍆\s*identity/i)) {
+        rclient.hincrby("usage:command", "identity", 1);
+
+        const gen = identityGrammar.flatten('#origin#');
         m.reply(gen);
     }
 

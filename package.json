@@ -1,12 +1,10 @@
 {
   "name": "bepised",
-  "version": "1.2",
+  "version": "1.3.0",
   "description": "bepis me",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Erin",
+  "scripts": {},
+  "author": "Erin Moon",
   "license": "ISC",
   "dependencies": {
     "discord.js": "^11.0.0",
